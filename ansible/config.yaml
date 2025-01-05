@@ -1,0 +1,9 @@
+---
+- name: Configure network devices
+  hosts: all
+  gather_facts: false
+  strategy: free
+  tasks:
+    - name: configure {{ inventory_hostname }}
+      junipernetworks.junos.junos_config:
+        src: "{{ inventory_hostname }}.j2"

@@ -1,0 +1,6 @@
+---
+ansible_network_os: junos
+ansible_connection: netconf
+ansible_user: root
+ansible_ssh_pass: clab123
+ansible_python_interpreter: /usr/bin/python3

@@ -1,0 +1,23 @@
+set interfaces eth1 description to_r4
+set interfaces eth1 unit 0 family inet address 10.1.0.11/31
+set interfaces eth2 description to_r2
+set interfaces eth2 unit 0 family inet address 10.1.0.5/31
+set interfaces eth3 description to_r6
+set interfaces eth3 unit 0 family inet address 10.1.0.12/31
+set interfaces lo0 unit 0 family inet address 192.168.0.5/32
+set interfaces lo0 unit 0 family inet6 address fec0:0:0:1111::5/128
+set interfaces lo0 unit 0 family iso address 49.6555.5000.1921.6800.0005.00
+set routing-options rib mpls.0
+set routing-options router-id 192.168.0.5
+set protocols isis interface eth1 level 2 metric 1000
+set protocols isis interface eth1 point-to-point
+set protocols isis interface eth2 level 2 metric 1000
+set protocols isis interface eth2 point-to-point
+set protocols isis interface eth3 level 2 metric 500
+set protocols isis interface eth3 point-to-point
+set protocols isis interface lo.0 passive
+set protocols isis level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols mpls interface eth1
+set protocols mpls interface eth2
+set protocols mpls interface eth3

@@ -1,0 +1,11 @@
+__pycache__
+.setup.yml.bak
+.DS_store
+.venv/
+*.code-workspace
+*.log
+clab-*
+junos.lic
+nohup.out
+secrets.env
+settings.json

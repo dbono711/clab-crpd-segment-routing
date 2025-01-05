@@ -1,0 +1,77 @@
+name: crpd-segment-routing
+
+mgmt:
+  network: br-crpd-segment-routing
+  ipv4-subnet: 10.0.0.0/24
+
+topology:
+  defaults:
+    license: junos.lic
+  kinds:
+    crpd:
+      image: crpd:22.4R1-S2.1
+  nodes:
+
+    # routers
+    r1:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.2
+      ports:
+        - 10022:10022
+      startup-config: r1/config
+    r2:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.3
+      ports:
+        - 10122:10122
+      startup-config: r2/config
+    r3:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.4
+      ports:
+        - 10222:10222
+      startup-config: r3/config
+    r4:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.5
+      ports:
+        - 10322:10322
+      startup-config: r4/config
+    r5:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.6
+      ports:
+        - 10422:10422
+      startup-config: r5/config
+    r6:
+      kind: crpd
+      mgmt-ipv4: 10.0.0.7
+      ports:
+        - 10522:10522
+      startup-config: r6/config
+    
+    # clients
+    ce1:
+      kind: linux
+      image: wbitt/network-multitool:alpine-extra
+      mgmt-ipv4: 10.0.0.10
+    ce2:
+      kind: linux
+      image: wbitt/network-multitool:alpine-extra
+      mgmt-ipv4: 10.0.0.11
+    ce3:
+      kind: linux
+      image: wbitt/network-multitool:alpine-extra
+      mgmt-ipv4: 10.0.0.12
+
+  links:
+    - endpoints: ["r1:eth1", "r2:eth1"]
+    - endpoints: ["r1:eth2", "r4:eth1"]
+    - endpoints: ["r1:eth3", "ce1:eth1"]
+    - endpoints: ["r2:eth2", "r5:eth2"]
+    - endpoints: ["r2:eth3", "r3:eth1"]
+    - endpoints: ["r3:eth2", "r6:eth2"]
+    - endpoints: ["r3:eth3", "ce2:eth1"]
+    - endpoints: ["r4:eth2", "r5:eth1"]
+    - endpoints: ["r5:eth3", "r6:eth1"]
+    - endpoints: ["r6:eth3", "ce3:eth1"]

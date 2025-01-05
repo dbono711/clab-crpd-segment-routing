@@ -1,0 +1,33 @@
+set interfaces eth1 description to_r5
+set interfaces eth1 unit 0 family inet address 10.1.0.13/31
+set interfaces eth2 description to_r3
+set interfaces eth2 unit 0 family inet address 10.1.0.9/31
+set interfaces eth3 description to_ce3
+set interfaces eth3 unit 20 vlan-id 20
+set interfaces eth3 unit 20 encapsulation vlan-bridge
+set interfaces eth3 unit 20 family inet address 172.17.1.6/30
+set interfaces lo0 unit 0 family inet address 192.168.0.6/32
+set interfaces lo0 unit 0 family inet6 address fec0:0:0:1111::6/128
+set interfaces lo0 unit 0 family iso address 49.6555.5000.1921.6800.0006.00
+set routing-instances GREEN instance-type vrf
+set routing-instances GREEN interface eth3.20
+set routing-instances GREEN route-distinguisher 192.168.0.6:10
+set routing-instances GREEN vrf-target target:65555L:2
+set routing-instances GREEN vrf-table-label
+set routing-options rib mpls.0
+set routing-options router-id 192.168.0.6
+set routing-options autonomous-system 65555
+set protocols bgp group PE-MESH type internal
+set protocols bgp group PE-MESH local-address 192.168.0.6
+set protocols bgp group PE-MESH family inet-vpn unicast
+set protocols bgp group PE-MESH neighbor 192.168.0.1 local-address 192.168.0.6
+set protocols bgp group PE-MESH neighbor 192.168.0.3 local-address 192.168.0.6
+set protocols isis interface eth1 level 2 metric 500
+set protocols isis interface eth1 point-to-point
+set protocols isis interface eth2 level 2 metric 1000
+set protocols isis interface eth2 point-to-point
+set protocols isis interface lo.0 passive
+set protocols isis level 1 disable
+set protocols isis level 2 wide-metrics-only
+set protocols mpls interface eth1
+set protocols mpls interface eth2
