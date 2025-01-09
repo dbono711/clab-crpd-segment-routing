@@ -18,6 +18,10 @@ set protocols isis interface eth3 point-to-point
 set protocols isis interface lo.0 passive
 set protocols isis level 1 disable
 set protocols isis level 2 wide-metrics-only
+set protocols isis source-packet-routing
+set protocols isis source-packet-routing srgb start-label 1000
+set protocols isis source-packet-routing srgb index-range 2000
+set protocols isis source-packet-routing node-segment ipv4-index 105
 set protocols mpls interface eth1
 set protocols mpls interface eth2
 set protocols mpls interface eth3

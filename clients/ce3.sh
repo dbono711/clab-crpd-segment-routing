@@ -2,7 +2,7 @@
 echo "8021q" >> /etc/modules
 
 # Load the 802.1Q module (if not already loaded)
-modprobe 8021q
+# modprobe 8021q
 
 # Configure VLAN sub-interface for GREEN
 ip link add name eth1.20 link eth1 type vlan id 20

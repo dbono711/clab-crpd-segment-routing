@@ -11,7 +11,7 @@ set interfaces lo0 unit 0 family inet6 address fec0:0:0:1111::6/128
 set interfaces lo0 unit 0 family iso address 49.6555.5000.1921.6800.0006.00
 set routing-instances GREEN instance-type vrf
 set routing-instances GREEN interface eth3.20
-set routing-instances GREEN route-distinguisher 192.168.0.6:10
+set routing-instances GREEN route-distinguisher 192.168.0.6:20
 set routing-instances GREEN vrf-target target:65555L:2
 set routing-instances GREEN vrf-table-label
 set routing-options rib mpls.0
@@ -29,5 +29,9 @@ set protocols isis interface eth2 point-to-point
 set protocols isis interface lo.0 passive
 set protocols isis level 1 disable
 set protocols isis level 2 wide-metrics-only
+set protocols isis source-packet-routing
+set protocols isis source-packet-routing srgb start-label 1000
+set protocols isis source-packet-routing srgb index-range 2000
+set protocols isis source-packet-routing node-segment ipv4-index 106
 set protocols mpls interface eth1
 set protocols mpls interface eth2

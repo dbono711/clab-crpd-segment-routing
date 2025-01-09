@@ -61,9 +61,6 @@ configure-only: initialize_log
 	@$(call log,Starting configuration...)
 	@$(call log,Running ansible playbook for cRPD configuration...)
 	@$(VENV_DIR)/bin/ansible-playbook -i $(ANSIBLE_HOSTS) -l network $(ANSIBLE_PLAYBOOK) >> $(LOG_FILE) 2>&1
-	@$(call log,Running shell scripts for client configuration...)
-	@$(call client_setup) >> $(LOG_FILE) 2>&1
-	@echo "Configuration complete. Check 'setup.log' for detailed output."
 
 .PHONY: clean
 clean: initialize_log

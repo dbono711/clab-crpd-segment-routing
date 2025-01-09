@@ -6,6 +6,9 @@ set interfaces eth3 description to_ce1
 set interfaces eth3 unit 10 vlan-id 10
 set interfaces eth3 unit 10 encapsulation vlan-bridge
 set interfaces eth3 unit 10 family inet address 172.16.1.2/30
+set interfaces eth3 unit 20 vlan-id 20
+set interfaces eth3 unit 20 encapsulation vlan-bridge
+set interfaces eth3 unit 20 family inet address 172.17.1.2/30
 set interfaces lo0 unit 0 family inet address 192.168.0.1/32
 set interfaces lo0 unit 0 family inet6 address fec0:0:0:1111::1/128
 set interfaces lo0 unit 0 family iso address 49.6555.5000.1921.6800.0001.00
@@ -14,6 +17,11 @@ set routing-instances BLUE interface eth3.10
 set routing-instances BLUE route-distinguisher 192.168.0.1:10
 set routing-instances BLUE vrf-target target:65555L:1
 set routing-instances BLUE vrf-table-label
+set routing-instances GREEN instance-type vrf
+set routing-instances GREEN interface eth3.20
+set routing-instances GREEN route-distinguisher 192.168.0.1:20
+set routing-instances GREEN vrf-target target:65555L:2
+set routing-instances GREEN vrf-table-label
 set routing-options rib mpls.0
 set routing-options router-id 192.168.0.1
 set routing-options autonomous-system 65555
@@ -29,5 +37,9 @@ set protocols isis interface eth2 point-to-point
 set protocols isis interface lo.0 passive
 set protocols isis level 1 disable
 set protocols isis level 2 wide-metrics-only
+set protocols isis source-packet-routing
+set protocols isis source-packet-routing srgb start-label 1000
+set protocols isis source-packet-routing srgb index-range 2000
+set protocols isis source-packet-routing node-segment ipv4-index 101
 set protocols mpls interface eth1
 set protocols mpls interface eth2
